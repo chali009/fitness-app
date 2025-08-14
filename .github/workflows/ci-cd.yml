@@ -39,3 +39,15 @@ jobs:
           docker stop fitness-container || true
           docker rm fitness-container || true
           docker run -d -p 80:80 --name fitness-container chali009/fitness-app:latest
+    - name: Test deployed app
+      run: |
+        echo "Testing deployed application..."
+        RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://${{ secrets.EC2_HOST }})
+        if [ "$RESPONSE" -ne 200 ]; then
+          echo "App test failed! HTTP status: $RESPONSE"
+          exit 1
+        else
+          echo "App test passed!"
+        fi
+
+
