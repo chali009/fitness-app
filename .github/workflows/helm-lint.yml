@@ -1,0 +1,24 @@
+name: Helm Lint
+
+on:
+  push:
+    paths:
+      - 'fitness-app/fitness-app-chart/**'
+  pull_request:
+    paths:
+      - 'fitness-app/fitness-app-chart/**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.12.0
+
+      - name: Run Helm Lint
+        run: helm lint fitness-app/fitness-app-chart
