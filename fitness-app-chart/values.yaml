@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: fitness-app
-  tag: latest
+  repository: chali009/fitness-app
+  tag: v1
   pullPolicy: IfNotPresent
 
 service:
