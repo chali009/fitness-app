@@ -12,6 +12,8 @@ spec:
       labels:
         app: {{ include "fitness-app.name" . }}
     spec:
+      imagePullSecrets:
+        - name: regcred         # <-- Add this here
       containers:
       - name: fitness-app
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
